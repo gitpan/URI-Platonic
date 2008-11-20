@@ -1,7 +1,7 @@
 use Test::Base;
 use URI::Platonic;
 
-plan tests => 4 * blocks;
+plan tests => 5 * blocks;
 
 run {
     my $block = shift;
@@ -11,6 +11,7 @@ run {
     is $uri->extension => $block->extension;
     is $uri->platonic  => $block->platonic;
     is $uri->distinct  => $block->distinct;
+    is $uri->as_string => $block->as_string;
 };
 
 __END__
@@ -19,3 +20,4 @@ __END__
 --- path: /path/to/resource
 --- platonic: http://example.com/path/to/resource
 --- distinct: http://example.com/path/to/resource
+--- as_string: http://example.com/path/to/resource

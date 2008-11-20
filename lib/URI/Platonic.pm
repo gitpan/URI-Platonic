@@ -18,6 +18,7 @@ has 'uri' => (
         scheme host port path query fragment
         path_query path_segments
         query_form query_keywords
+        as_string
     );
 
     for my $method (@handles) {
@@ -35,7 +36,7 @@ has 'extension' => (
 
 no Moose;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub BUILD {
     my $self = shift;
@@ -89,19 +90,19 @@ URI::Platonic - Platonic and Distinct URIs
   use URI::Platonic;
   
   my $uri = URI::Platonic->new(uri => "http://example.com/path/to/resource.html");
-     $uri = URI::Platonic->new(uri => $uri);
+     $uri = URI::Platonic->new(uri => URI->new("http://example.com/foo.xml"));
   
-  print $platonic->path;      # "/path/to/resource"
-  print $platonic->extension; # "html"
-  print $platonic->platonic;  # "http://example.com/path/to/resource"
-  print $platonic->distinct;  # "http://example.com/path/to/resource.html"
+  print $uri->path;      # "/path/to/resource"
+  print $uri->extension; # "html"
+  print $uri->platonic;  # "http://example.com/path/to/resource"
+  print $uri->distinct;  # "http://example.com/path/to/resource.html"
   
-  $platonic->extension('xml');
-  print $platonic->distinct;  # "http://example.com/path/to/resource.xml"
+  $uri->extension('xml');
+  print $uri->distinct;  # "http://example.com/path/to/resource.xml"
   
-  $platonic->path('/path/to/another');
-  print $platonic->platonic;  # "http://example.com/path/to/another"
-  print $platonic->distinct;  # "http://example.com/path/to/another.xml"
+  $uri->path('/path/to/another');
+  print $uri->platonic;  # "http://example.com/path/to/another"
+  print $uri->distinct;  # "http://example.com/path/to/another.xml"
 
 =head1 DESCRIPTION
 
